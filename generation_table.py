@@ -66,8 +66,5 @@ def generation_table(start_table, employee, days, driver, collector, first_week_
             employee_grafic.append(shift)
         table.append(employee_grafic)
     table = DataFrame(data=table)
+    print('table')
     return table
-
-from my_parser import parser
-table = parser('C:/Users/User/Downloads/Хакатон IT График СЕНТЯБРЬ(задание   список правил).xlsx')
-tables = [generation_table(table, table.shape[0], 30, 31, 25, table.columns[8].weekday()) for i in range(1000)]
