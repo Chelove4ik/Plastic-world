@@ -84,6 +84,7 @@ class Ui_MainWindow(QMainWindow):
         self.pushButton_3.setText(_translate("MainWindow", "Открыть таблицу"))
 
     def open_path(self):
+        global PATH
         filename = QFileDialog.getOpenFileName(self, 'Open file')[0]
         self.lineEdit.setText(str(filename))
         PATH = str(filename)
@@ -95,7 +96,3 @@ class Ui_MainWindow(QMainWindow):
     def downloading(self):
         self.label_downloading.setText("Загрузка...")
         self.label_downloading.resize(self.label_downloading.sizeHint())
-
-
-
-
