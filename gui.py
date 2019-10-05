@@ -1,7 +1,11 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtWidgets import QFileDialog
+from PyQt5.QtWidgets import QMainWindow
 
 
-class Ui_MainWindow(object):
+class Ui_MainWindow(QMainWindow):
+    def __init__(self):
+        super().__init__()
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(1123, 478)
@@ -40,6 +44,7 @@ class Ui_MainWindow(object):
         self.pushButton_3 = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton_3.setGeometry(QtCore.QRect(550, 50, 191, 28))
         self.pushButton_3.setObjectName("pushButton_3")
+        self.pushButton_3.pressed.connect(self.open_file)
         MainWindow.setCentralWidget(self.centralwidget)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
@@ -62,9 +67,14 @@ class Ui_MainWindow(object):
         self.pushButton_2.setText(_translate("MainWindow", "Создать график"))
         self.pushButton_3.setText(_translate("MainWindow", "Открыть таблицу"))
 
+    def open_file(self):
+        filename = QFileDialog.getOpenFileName(self, 'Open file')[0]
+        self.lineEdit.setText(str(filename))
+
 
 if __name__ == "__main__":
     import sys
+
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
     ui = Ui_MainWindow()
