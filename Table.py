@@ -1,6 +1,8 @@
+from pandas import DataFrame
+
 class Table:
     def __init__(self, table):
-        self.table = table
+        self.table: DataFrame = table
 
     def mutate(self):  # TODO: исправить и доделать
         for i in self.employees:
@@ -44,3 +46,13 @@ class Table:
                             and not (self.table[i, 2] == 'вод' and self.table[i, j] in VODsun):
                         return False
         #  if TODO: ой я устал сделайте сами пункт 6 и дальше
+
+    def crossover(self, other):
+        from random import randint
+        rand_index = randint(1, self.table.shape[0] - 1)
+        for i in range(1, rand_index):
+            for name in self.table:
+                self.table.loc[i, name], other.loc[i, name] = other.table.loc[i, name], self.table.loc[i, name]
+
+
+
