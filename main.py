@@ -5,6 +5,7 @@ from PyQt5.QtWidgets import QFileDialog
 from PyQt5.QtWidgets import QMainWindow
 from my_parser import parser
 from generation_table import generation_table
+from Table import Table
 PATH = ''
 
 
@@ -100,7 +101,8 @@ class Ui_MainWindow(QMainWindow):
         self.label_downloading.setText("Загрузка...")
         self.label_downloading.resize(self.label_downloading.sizeHint())
         table = parser(PATH)
-        tables = [generation_table(table, table.shape[0], 30, 31, 25, table.columns[8].weekday()) for i in range(1000)]
+        tables = [Table(generation_table(table, table.shape[0], 30, 31, 25, table.columns[8].weekday())) for i in range(10)]
+        for i in tables:
 
 
 def main():
