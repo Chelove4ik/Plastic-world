@@ -8,8 +8,10 @@ def main():
     ui = Ui_MainWindow()
     ui.setupUi(MainWindow)
     MainWindow.show()
+    ##
+    #  Код, пожалуйста
+    ##
     sys.exit(app.exec_())
 
 
-if __name__() == '__main__':
-    main()
+main()
