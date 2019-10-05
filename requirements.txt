@@ -1,0 +1,4 @@
+PyQt5==5.13.1
+pandas==0.25.1
+openpyxl==3.0.0
+xlrd==1.2.0
