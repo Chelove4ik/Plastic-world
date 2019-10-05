@@ -6,6 +6,7 @@ from PyQt5.QtWidgets import QMainWindow
 from my_parser import parser
 from generation_table import generation_table
 from Table import Table
+from writer_to_xlsx import writer
 PATH = ''
 
 
@@ -102,8 +103,10 @@ class Ui_MainWindow(QMainWindow):
         self.label_downloading.resize(self.label_downloading.sizeHint())
         table = parser(PATH)
         tables = [Table(generation_table(table, table.shape[0], 30, 31, 25, table.columns[8].weekday())) for i in range(10)]
-        for i in tables:
-
+        #tables = [i for i in tables if i.check() < 5000]
+        print('kek')
+        writer(PATH, tables[0].get_table())
+        print('lol')
 
 def main():
     from Table import Table
