@@ -46,6 +46,13 @@ class Ui_MainWindow(QMainWindow):
         self.pushButton_2 = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton_2.setGeometry(QtCore.QRect(640, 57, 191, 61))
         self.pushButton_2.setObjectName("pushButton_2")
+        self.pushButton_2.clicked.connect(self.downloading)
+
+
+        self.label_downloading = QtWidgets.QLabel(self.centralwidget)
+        self.label_downloading.setGeometry(QtCore.QRect(20, 140, 151, 71))
+        self.label_downloading.setObjectName("label")
+
         self.pushButton_3 = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton_3.setGeometry(QtCore.QRect(420, 48, 191, 28))
         self.pushButton_3.setObjectName("pushButton_3")
@@ -55,9 +62,6 @@ class Ui_MainWindow(QMainWindow):
         self.pushButton_4.setText('Путь сохранения таблицы')
         self.pushButton_4.pressed.connect(self.save_path)
         MainWindow.setCentralWidget(self.centralwidget)
-        self.statusbar = QtWidgets.QStatusBar(MainWindow)
-        self.statusbar.setObjectName("statusbar")
-        MainWindow.setStatusBar(self.statusbar)
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
@@ -87,6 +91,19 @@ class Ui_MainWindow(QMainWindow):
     def save_path(self):
         filename = QFileDialog.getSaveFileName(self, 'Save file', '', '*.xslx')[0]
         self.lineEdit_1.setText(str(filename))
+
+    def downloading(self):
+        self.label_downloading.setText("Загрузка...")
+        self.label_downloading.resize(self.label_downloading.sizeHint())
+        while True:
+            a = 0
+            if a == 100000:
+                self.label_downloading.setText("Загрузка...")
+                self.label_downloading.resize(self.label_downloading.sizeHint())
+            else:
+                self.label_downloading.setText("Загрузка.....")
+                self.label_downloading.resize(self.label_downloading.sizeHint())
+            a += 1
 
 
 
