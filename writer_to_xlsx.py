@@ -1,7 +1,8 @@
 from openpyxl import load_workbook
-
+from Table import Table
 import pandas as pd
 from my_parser import parser
+from generation_table import generation_table
 
 def writer(addr_input_file: str, data: pd.core.frame.DataFrame, addr_for_save=None) -> None:
     months = {
@@ -25,9 +26,10 @@ def writer(addr_input_file: str, data: pd.core.frame.DataFrame, addr_for_save=No
             addr_input_file.replace('/', '*').replace('//', '*').replace('\\', '*').split('*')[:-1])
     else:
         addr_for_save = '/'.join(addr_for_save.replace('/', '*').replace('//', '*').replace('\\', '*').split('*')[:-1])
-
-    writ = pd.ExcelWriter(f'{addr_for_save}Расписание за {months[data.columns[10].month]}.xlsx', engine='openpyxl')
-    print(f'{addr_for_save}Расписание за {months[data.columns[10].month]}.xlsx')
+    print(data.columns[10])
+    print(months[data.columns[10]])
+    writ = pd.ExcelWriter(f'{addr_for_save}Расписание за {months[data.columns[10]]}.xlsx', engine='openpyxl')
+    print(f'{addr_for_save}Расписание за {months[data.columns[10]]}.xlsx')
     writ.book = book
     writ.sheets = dict((ws.title, ws) for ws in book.worksheets)
 
@@ -35,5 +37,9 @@ def writer(addr_input_file: str, data: pd.core.frame.DataFrame, addr_for_save=No
     data.to_excel(writ, "График", startrow=6, header=False)
     writ.save()
 
-#table = parser('C:/Users/User/Downloads/Хакатон IT График СЕНТЯБРЬ(задание   список правил).xlsx')
-#writer('C:/Users/User/Downloads/Хакатон IT График СЕНТЯБРЬ(задание   список правил).xlsx', table)
+
+table = parser('C:/Users/User/Downloads/Хакатон IT График СЕНТЯБРЬ(задание   список правил).xlsx')
+tables = [Table(generation_table(table, table.shape[0], 30, 31, 25, table.columns[8].weekday())) for i in range(10)]
+
+table = parser('C:/Users/User/Downloads/Хакатон IT График СЕНТЯБРЬ(задание   список правил).xlsx')
+writer('C:/Users/User/Downloads/Хакатон IT График СЕНТЯБРЬ(задание   список правил).xlsx', tables[0].get_table())
