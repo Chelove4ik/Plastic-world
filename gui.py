@@ -95,15 +95,7 @@ class Ui_MainWindow(QMainWindow):
     def downloading(self):
         self.label_downloading.setText("Загрузка...")
         self.label_downloading.resize(self.label_downloading.sizeHint())
-        while True:
-            a = 0
-            if a == 100000:
-                self.label_downloading.setText("Загрузка...")
-                self.label_downloading.resize(self.label_downloading.sizeHint())
-            else:
-                self.label_downloading.setText("Загрузка.....")
-                self.label_downloading.resize(self.label_downloading.sizeHint())
-            a += 1
+
 
 
 
