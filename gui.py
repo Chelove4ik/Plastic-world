@@ -32,6 +32,9 @@ class Ui_MainWindow(QMainWindow):
         self.lineEdit = QtWidgets.QLineEdit(self.centralwidget)
         self.lineEdit.setGeometry(QtCore.QRect(120, 50, 389, 24))
         self.lineEdit.setObjectName("lineEdit")
+        self.lineEdit_1 = QtWidgets.QLineEdit(self.centralwidget)
+        self.lineEdit_1.setGeometry(QtCore.QRect(120, 100, 389, 24))
+        self.lineEdit_1.setObjectName("lineEdit")
         self.label = QtWidgets.QLabel(self.centralwidget)
         self.label.setGeometry(QtCore.QRect(20, 30, 151, 71))
         self.label.setObjectName("label")
@@ -44,7 +47,11 @@ class Ui_MainWindow(QMainWindow):
         self.pushButton_3 = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton_3.setGeometry(QtCore.QRect(550, 50, 191, 28))
         self.pushButton_3.setObjectName("pushButton_3")
-        self.pushButton_3.pressed.connect(self.open_file)
+        self.pushButton_3.pressed.connect(self.open_path)
+        self.pushButton_4 = QtWidgets.QPushButton(self.centralwidget)
+        self.pushButton_4.setGeometry(QtCore.QRect(800, 50, 191, 28))
+        self.pushButton_4.setText('Путь сохранения таблицы')
+        self.pushButton_4.pressed.connect(self.save_path)
         MainWindow.setCentralWidget(self.centralwidget)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
@@ -62,14 +69,19 @@ class Ui_MainWindow(QMainWindow):
         self.label_4.setText(_translate("MainWindow", "Приоритетные смены"))
         self.textEdit_2.setPlaceholderText(_translate("MainWindow", "Названия смен"))
         self.lineEdit.setPlaceholderText(_translate("MainWindow", "Путь"))
+        self.lineEdit.setPlaceholderText(_translate("MainWindow", "Путь Сохранения"))
         self.label.setText(_translate("MainWindow", "Путь к таблице"))
         self.pushButton.setText(_translate("MainWindow", "Добавить информацию"))
         self.pushButton_2.setText(_translate("MainWindow", "Создать график"))
         self.pushButton_3.setText(_translate("MainWindow", "Открыть таблицу"))
 
-    def open_file(self):
+    def open_path(self):
         filename = QFileDialog.getOpenFileName(self, 'Open file')[0]
         self.lineEdit.setText(str(filename))
+
+    def save_path(self):
+        filename = QFileDialog.getSaveFileName(self, 'Save file', '', '*.xslx')[0]
+        self.lineEdit_1.setText(str(filename))
 
 
 if __name__ == "__main__":
