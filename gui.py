@@ -2,6 +2,8 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QFileDialog
 from PyQt5.QtWidgets import QMainWindow
 
+PATH = ''
+
 
 class Ui_MainWindow(QMainWindow):
     def __init__(self):
@@ -80,6 +82,7 @@ class Ui_MainWindow(QMainWindow):
     def open_path(self):
         filename = QFileDialog.getOpenFileName(self, 'Open file')[0]
         self.lineEdit.setText(str(filename))
+        PATH = str(filename)
 
     def save_path(self):
         filename = QFileDialog.getSaveFileName(self, 'Save file', '', '*.xslx')[0]
