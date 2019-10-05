@@ -2,7 +2,7 @@ import pandas as pd
 from openpyxl import load_workbook
 
 
-def writer(addr_input_file: str, data: pd.core.frame.DataFrame, ) -> None:
+def writer(addr_input_file: str, data: pd.core.frame.DataFrame, addr_for_save=None) -> None:
     months = {
         1: 'январь',
         2: 'февраль',
@@ -19,9 +19,12 @@ def writer(addr_input_file: str, data: pd.core.frame.DataFrame, ) -> None:
     }
     book = load_workbook(addr_input_file)
 
-    addr_input_file = '\\'.join(addr_input_file.replace('/', ' ').replace('//', ' ').replace('\\', ' ').split()[:-1])
+    if addr_for_save is None:
+        addr_for_save = '\\'.join(addr_input_file.replace('/', ' ').replace('//', ' ').replace('\\', ' ').split()[:-1])
+    else:
+        addr_for_save = '\\'.join(addr_for_save.replace('/', ' ').replace('//', ' ').replace('\\', ' ').split()[:-1])
 
-    writ = pd.ExcelWriter(f'{addr_input_file}Расписание за {months[data.columns[10].month]}.xlsx', engine='openpyxl')
+    writ = pd.ExcelWriter(f'{addr_for_save}Расписание за {months[data.columns[10].month]}.xlsx', engine='openpyxl')
     writ.book = book
     writ.sheets = dict((ws.title, ws) for ws in book.worksheets)
 
