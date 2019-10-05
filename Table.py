@@ -1,4 +1,5 @@
 from pandas import DataFrame
+from constants import *
 
 class Table:
     def __init__(self, table):
@@ -54,5 +55,15 @@ class Table:
             for name in self.table:
                 self.table.loc[i, name], other.loc[i, name] = other.table.loc[i, name], self.table.loc[i, name]
 
-
-
+    def mutation(self):
+        from random import randint
+        rand_index = randint()
+        for name in self.table:
+            for elm in self.table[name]:
+                if not name:
+                    tp = elm
+                    # TODO: сделать проверку на тип смены (ИНК ИЛИ ВОД)
+                if not ('ФИО' in name or '№' in name or not name):
+                    # if tp == tp_shift
+                    from random import choice
+                    elm = choice(shifts)
