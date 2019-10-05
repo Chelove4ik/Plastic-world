@@ -105,7 +105,7 @@ class Ui_MainWindow(QMainWindow):
         tables = [Table(generation_table(table, table.shape[0], 30, 31, 25, table.columns[8].weekday())) for i in range(10)]
         #tables = [i for i in tables if i.check() < 5000]
         print(tables[0].get_table(), PATH)
-        writer('C:/Users/User/Downloads/Хакатон IT График СЕНТЯБРЬ(задание   список правил).xlsx', tables[0].get_table())
+        writer('data/input_data.xlsx', tables[0].get_table())
         print('lol')
 
 def main():

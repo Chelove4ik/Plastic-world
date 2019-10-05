@@ -28,18 +28,18 @@ def writer(addr_input_file: str, data: pd.core.frame.DataFrame, addr_for_save=No
         addr_for_save = '/'.join(addr_for_save.replace('/', '*').replace('//', '*').replace('\\', '*').split('*')[:-1])
     print(data.columns[10])
     print(months[data.columns[10]])
-    writ = pd.ExcelWriter(f'{addr_for_save}Расписание за {months[data.columns[10]-1]}.xlsx', engine='openpyxl')
+    writ = pd.ExcelWriter(f'{addr_for_save}Расписание.xlsx', engine='openpyxl')
     print(f'{addr_for_save}Расписание за {months[data.columns[10]]}.xlsx')
     writ.book = book
     writ.sheets = dict((ws.title, ws) for ws in book.worksheets)
 
     data = data.iloc[:, 1:]
-    data.to_excel(writ, "График", startrow=6, header=False, startcol=8)
+    data.to_excel(writ, "График", startrow=6, header=False, startcol=8, index=False)
     writ.save()
 
 
-table = parser('data/input_data.xlsx')
-tables = [Table(generation_table(table, table.shape[0], 30, 31, 25, table.columns[8].weekday())) for i in range(10)]
+# table = parser('data/input_data.xlsx')
+# tables = [Table(generation_table(table, table.shape[0], 30, 31, 25, table.columns[8].weekday())) for i in range(1000)]
 
 # table = parser('C:/Users/User/Downloads/Хакатон IT График СЕНТЯБРЬ(задание   список правил).xlsx')
-writer('data/input_data.xlsx', tables[0].get_table())
+# writer('data/input_data.xlsx', tables[0].get_table())
